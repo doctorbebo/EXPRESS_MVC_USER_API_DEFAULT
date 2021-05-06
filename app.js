@@ -1,6 +1,9 @@
 const path = require("path");
 const express = require("express");
-const router = require("./controller/routes");
+const userRouter = require("./routes/userRoute");
+
+// Sets up the process.env file for use
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +17,8 @@ app.use(express.json());
 //app.use(express.static(path.join (__dirname, './view/public')));
 
 // uses the routes specified in the routes.js file.
-app.use('/', router); 
+app.use('/api/user', userRouter);
+app.get('/*', (req, res) => res.send('defualt page')); 
 
 
 app.listen(PORT, ()=> console.log(`listening of PORT ${PORT}`));
